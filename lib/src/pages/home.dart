@@ -1,31 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sns_form/src/components/image_data.dart';
-import 'package:flutter_sns_form/src/components/post_widget.dart';
-class Home extends StatelessWidget {
-  const Home({Key?key}):super(key: key);
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-  Widget _postList(){
-    return Column(
-      children: List.generate(50,(index) => PostWidget()).toList(),
+
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyHomePage(),
     );
   }
-  
+}
 
-
-
-
+class MyHomePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: ImageData(IconsPath.mylogo,width:270),
-        actions: [],
-
+        title: Text('홈 화면'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WebViewWidget(),
+              ),
+            );
+          },
+          child: Text('시작'),
         ),
-        body:ListView(children:[_postList()],)
+      ),
     );
   }
-  
+}
+
+class WebViewWidget extends StatefulWidget {
+  @override
+  _WebViewWidgetState createState() => _WebViewWidgetState();
+}
+
+class _WebViewWidgetState extends State<WebViewWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('WebView With In App WebView'),
+      ),
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(url: WebUri('https://youtube.com')),
+      ),
+    );
+  }
 }

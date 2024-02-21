@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
 
-import 'package:flutter_sns_form/src/pages/match_list.dart';
+
 
 class CatchPet extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class CatchPetPage extends StatefulWidget {
 }
 
 class _CatchPetPageState extends State<CatchPetPage> {
-  late CameraController? _controller;
+  CameraController? _controller;
   late String _imagePath;
 
   @override
@@ -28,10 +28,10 @@ class _CatchPetPageState extends State<CatchPetPage> {
     // 카메라 초기화
     WidgetsFlutterBinding.ensureInitialized();
     availableCameras().then((cameras) {
-      final backCamera = cameras.firstWhere(
-          (camera) => camera.lensDirection == CameraLensDirection.back);
+      final frontCamera = cameras.firstWhere(
+          (camera) => camera.lensDirection == CameraLensDirection.front);
 
-      _controller = CameraController(backCamera, ResolutionPreset.medium);
+      _controller = CameraController(frontCamera, ResolutionPreset.medium);
       _controller!.initialize().then((_) {
         if (!mounted) {
           return;
@@ -53,11 +53,7 @@ class _CatchPetPageState extends State<CatchPetPage> {
       setState(() {
         _imagePath = image.path;
       });
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => MatchList(imagePath: _imagePath),
-        ),
-      );
+      
     } catch (e) {
       print('사진을 캡쳐하는 중에 오류가 발생했습니다: $e');
     }
