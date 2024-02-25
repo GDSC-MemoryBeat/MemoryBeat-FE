@@ -26,7 +26,7 @@
 
 # 👨‍👦‍👦 Team Members
 
-|              [Yuna Park](https://github.com/realyuna)              |            [Sumin Bae](https://github.com/Choi-JY1107)             |            [Yejun Han](https://github.com/DancingGamza)            |
+|              [Yuna Park](https://github.com/realyuna)              |            [Sumin Bae](https://github.com/sumsum07)             |            [Yejun Han](https://github.com/Cat-yejun)            |
 |:------------------------------------------------------------:|:------------------------------------------------------------:|:------------------------------------------------------------:|
 | ![박유나](image/yu.png) | ![배수민](image/soo.png) | ![한예준](image/ye.png) |
 |                       Frontend                    |                      Backend                     |                              AI                              |
