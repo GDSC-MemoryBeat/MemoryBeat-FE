@@ -1,16 +1,45 @@
-# flutter_sns_form
+# Project Catch Pet!
 
-A new Flutter project.
+![Memory Beat](image/icon.jpg)
 
-## Getting Started
+- [backend link](https://github.com/GDSC-MemoryBeat/Memory-BE)
 
-This project is a starting point for a Flutter application.
+## 🖐️ Preventing Dementia With Hand Exercise
 
-A few resources to get you started if this is your first Flutter project:
+> Look at the colors and match the hand gestures to get points
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Matching colors and hand gestures to help increase memory
+- It analyzes the score and shows how much the improvement is
+  
+# 📃 App Menual
+## Main window
+![main](image/mainstart.jpg)
+## Tutorial
+![Tutorial](image/tutorialing.gif)
+## Game
+![Game](image/gaming.gif)
+## Game ends
+![Game ends](image/result.jpg)
+## Score
+![Score](image/scoring.gif)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+# 👨‍👦‍👦 Team Members
+
+|              [Yuna Park](https://github.com/realyuna)              |            [Sumin Bae](https://github.com/Choi-JY1107)             |            [Yejun Han](https://github.com/DancingGamza)            |
+|:------------------------------------------------------------:|:------------------------------------------------------------:|:------------------------------------------------------------:|
+| ![박유나](image/yu.png) | ![배수민](image/soo.png) | ![한예준](image/ye.png) |
+|                       Frontend                    |                      Backend                     |                              AI                              |
+
+
+# 🛠️  TECH Stack
+
+
+![tech_stack](image/tech_stack.png)
+
+
+
+
+
+# 📱 How to execute App
+>only available in android
