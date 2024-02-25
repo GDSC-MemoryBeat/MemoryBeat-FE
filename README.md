@@ -1,4 +1,4 @@
-# Project Catch Pet!
+# GDSC Project Memory Beat!
 
 ![Memory Beat](image/icon.jpg)
 
