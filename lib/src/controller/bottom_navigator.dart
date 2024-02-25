@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:memorybeating/src/components/message_popup.dart';
 enum PageName{nft,fest,profile}
 class BottomNavController extends GetxController{
-  RxInt pageIndex=1.obs;
-  List<int> bottomHistory =[1];
+  RxInt pageIndex=0.obs;
+  List<int> bottomHistory =[0];
 
   void changeBottomNav(int value,{bool hasGesture = true}){
     var page=PageName.values[value];

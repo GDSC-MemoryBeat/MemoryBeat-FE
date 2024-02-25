@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:memorybeating/src/components/image_data.dart';
 import 'package:memorybeating/src/controller/bottom_navigator.dart';
 import 'package:memorybeating/src/pages/home.dart';
-
+import 'package:memorybeating/src/pages/scores.dart';
+import 'package:memorybeating/src/pages/catch_pet.dart';
 class App extends GetView<BottomNavController>{
   const App({Key? key}) : super(key: key);
 
@@ -16,12 +17,11 @@ class App extends GetView<BottomNavController>{
           index: controller.pageIndex.value,
           children: [
             Home(),
-            Container(
-              child: const Center(child: Text('festival')),
-            ),
-            Container(
-              child: const Center(child: Text('profile')),
-            ),
+            ScorePage(),
+            CatchPet(),
+            //Container(
+              //child: const Center(child: Text('profile')),
+            //),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
