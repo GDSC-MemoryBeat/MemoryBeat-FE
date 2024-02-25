@@ -8,7 +8,7 @@ class ScorePage extends StatelessWidget {
   final List<double> scores;
 
   // scores 배열에서 최대 값 찾아서 최고 점수로 설정
-  ScorePage({this.scores = const [130, 580, 850, 345, 593, 230, 483, 493, 750, 750, 800]});
+  ScorePage({this.scores = const [2, 4, 4, 5, 6, 8, 6, 4, 6, 5, 4]});
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +21,52 @@ class ScorePage extends StatelessWidget {
         : scores;
 
     // 데이터를 이용해 꺽은선 그래프를 생성
-    LineChartData data = LineChartData(
-  lineBarsData: [
-    LineChartBarData(
-      spots: recentScores.asMap().entries.map((entry) {
-        return FlSpot(entry.key.toDouble(), entry.value);
-      }).toList(),
-      isCurved: true,
-      barWidth: 4,
-      isStrokeCapRound: true,
-      belowBarData: BarAreaData(show: false),
-      //color:Color.fromARGB(a, r, g, b),
-      color:Colors.blue
-      //colors: [Colors.blue], // 색상을 여기서 설정합니다.
-    ),
-  ],
-);
+      LineChartData data = LineChartData(
+      // 나머지 축 숨기기
+      titlesData: FlTitlesData(
+        show: true,
+        rightTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        topTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            interval: 1,
+            
+            //getTitlesWidget: leftTitleWidgets,
+            reservedSize: 36,
+          ),
+        ),
+      ),
+      borderData: FlBorderData(
+        show: true,
+        border: Border.all(color: const Color.fromARGB(255, 255, 255, 255)),
+      ),
+      minX: 0,
+      maxX: 9,
+      minY: 0,
+      //maxY: 10,
+      
+      lineBarsData: [
+        LineChartBarData(
+          spots: recentScores.asMap().entries.map((entry) {
+            return FlSpot(entry.key.toDouble(), entry.value);
+          }).toList(),
+          isCurved: true,
+          barWidth: 4,
+          isStrokeCapRound: true,
+          belowBarData: BarAreaData(show: false),
+          color: const Color.fromARGB(255, 255, 255, 255),
+        ),
+      ],
+    );
 
     // 최근 데이터 분석
     double lastScore = recentScores.last;
@@ -46,42 +76,44 @@ class ScorePage extends StatelessWidget {
     // 분석 결과에 따른 문구 설정
     String analysisText;
     if (changePercent > 0) {
-      analysisText = "저번보다 오늘 $changePercent%가 상승했고, 잘했습니다!";
+      analysisText = 
+"Today, it has increased by $changePercent% compared to last time, well done!";
     } else if (changePercent < 0) {
-      analysisText = "저번보다 오늘 ${changePercent.abs()}%가 하락했고, 분발해보세요!";
+      analysisText = "Today, it has decreased by ${changePercent.abs()}% compared to last time, keep trying your best!";
     } else {
-      analysisText = "저번과 동일한 점수에요. 계속 힘내세요!";
+      analysisText = "It's the same score as last time. Keep up the good work!";
     }
 
     return Scaffold(
       //appBar: AppBar(
       //  title: Text('Score Page'),
       //),
+      backgroundColor: Color.fromARGB(255, 81, 121, 94),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              '최고점: $maxScore',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              'The Highest Score: $maxScore',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Baloo'),
             ),
             SizedBox(height: 20),
             Text(
-              '점수 변화 분석:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Score Change Analysis:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Baloo'),
             ),
             Text(
               analysisText,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16, color: Colors.white, fontFamily: 'Baloo'),
             ),
             SizedBox(height: 20),
             Text(
-              '점수 변화 추이:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Score Change Graph:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Baloo'),
             ),
             SizedBox(height: 10),
-            Expanded(
+             Expanded(
               child: LineChart(data),
             ),
           ],

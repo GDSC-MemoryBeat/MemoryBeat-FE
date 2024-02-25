@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:memorybeating/src/components/message_popup.dart';
-enum PageName{nft,fest,profile}
+enum PageName{game,score}
 class BottomNavController extends GetxController{
   RxInt pageIndex=0.obs;
   List<int> bottomHistory =[0];
@@ -10,10 +10,9 @@ class BottomNavController extends GetxController{
   void changeBottomNav(int value,{bool hasGesture = true}){
     var page=PageName.values[value];
     switch(page){
-      //Get.to(()=>이동하는페이지함수())도 가능함...
-      case PageName.nft:
-      case PageName.fest:
-      case PageName.profile:
+      //Get.to(()=>이동하는페이지함수())도 가능함
+      case PageName.game:
+      case PageName.score:
         _changePage(value,hasGesture:hasGesture);
         break;
     }
@@ -30,11 +29,11 @@ class BottomNavController extends GetxController{
   Future<bool> willPopAction() async{
     if (bottomHistory.length == 1){
       showDialog(context: Get.context!,builder:(context)=>MessagePopup(
-        message:'종료하시겠습니까?',
+        message:'Want to exit?',
         okCallback:() {
           exit(0);},
         cancelCallback: Get.back,
-        title:'시스템',
+        title:'System',
         ));
       return Future<bool>.value(true);
     }

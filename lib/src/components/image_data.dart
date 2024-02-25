@@ -13,15 +13,15 @@ class ImageData extends StatelessWidget {
   Widget build(BuildContext context){
     return SvgPicture.asset(
       icon,
-      width: width! / Get.mediaQuery.devicePixelRatio
+      width:60,
+      //width: width! / Get.mediaQuery.devicePixelRatio
       );
   }
 }
 class IconsPath {
-   static String get nftOff => 'assets/images/nft_logo.svg';
-   static String get nftOn => 'assets/images/nft_logo_on.svg';
-   static String get festOff => 'assets/images/fest_logo.svg';
-   static String get festOn => 'assets/images/fest_logo_on.svg';
-   static String get profileOff => 'assets/images/profile_logo.svg';
-   static String get profileOn => 'assets/images/profile_logo_on.svg';
+   static String get gameOff => 'assets/images/gaa.svg';
+   static String get gameOn => 'assets/images/gaaa.svg';
+   static String get scoreOff => 'assets/images/scc.svg';
+   static String get scoreOn => 'assets/images/scc_on.svg';
+  
 }

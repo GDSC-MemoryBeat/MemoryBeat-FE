@@ -43,10 +43,16 @@ dependencies:
   fl_chart: ^0.66.2
   permission_handler: ^11.3.0
   url_launcher: ^6.2.5
+  http: ^1.2.1
+  flutter_launcher_icons: ^0.13.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+ 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.jpg"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -68,10 +74,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/images/profile_logo.svg
-    - assets/images/nft_logo.svg
-    - assets/images/fest_logo.svg
-
+  fonts:
+    - family: baloo
+      fonts:
+        - asset: assets/fonts/BalooBhaijaan2-VariableFont_wght.ttf
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

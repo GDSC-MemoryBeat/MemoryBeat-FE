@@ -54,14 +54,14 @@ Widget build(BuildContext context) {
                   children: [
                     ElevatedButton(
                       onPressed: okCallback,
-                      child: Text('확인'),
+                      child: Text('Ok'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 44, 60, 143),),
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton(
                       onPressed: cancelCallback,
-                      child: Text('취소'),
+                      child: Text('Cancel'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey,
                       ),

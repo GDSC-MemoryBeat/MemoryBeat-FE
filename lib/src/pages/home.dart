@@ -1,6 +1,8 @@
+import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 class Home extends StatelessWidget {
@@ -14,19 +16,19 @@ class Home extends StatelessWidget {
 
 class TutorialDialog extends StatelessWidget {
   final List<Map<String, String>> messages = [
-    {"image": "assets/images/add_friend_icon.jpg", "text": "초록색이 보이면 검지손가락을 만들어 주세요!"},
-    {"image": "assets/images/blue_mem.png", "text": "파란색이 보이면 엄지손가락과 새끼손가락을 펴주세요!"},
-    {"image": "assets/images/red_green.png", "text": "빨간색이 보이면 주먹으로 만들어 주세요! 양손의 색깔은 랜덤으로 나옵니다!"},
-    {"image": "assets/images/score_example.png", "text": "한번의 손가락 세트를 맞출때마다 점수를 1점씩 얻습니다!"}
+    {"image": "assets/images/green_one.PNG", "text": "If you see green, \njust straighten your index finger!"},
+    {"image": "assets/images/blue_mem.PNG", "text": "If you see blue, \nstraighten your thumb and pinky!"},
+    {"image": "assets/images/red_green.PNG", "text": "If you see red, make a fist!\nBoth hands come out in random colors!"},
+    {"image": "assets/images/score_example.PNG", "text": "You get 1 point \nfor every set of fingers you get!"},
   ];
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("튜토리얼"),
+      title: Text("Tutorial",style: TextStyle(fontFamily: 'baloo'),),
       content: Container(
         width: double.maxFinite,
-        height: 300, // 다이얼로그 높이 조절
+        height: 300,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: messages.length,
@@ -38,7 +40,7 @@ class TutorialDialog extends StatelessWidget {
                 children: [
                   Image.asset(messages[index]["image"]!),
                   SizedBox(height: 10),
-                  Text(messages[index]["text"]!),
+                  Text(messages[index]["text"]!,style: TextStyle(fontFamily: "baloo",fontWeight:FontWeight.bold),),
                 ],
               ),
             );
@@ -50,7 +52,7 @@ class TutorialDialog extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text("확인"),
+          child: Text("OK"),
         ),
       ],
     );
@@ -61,10 +63,37 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 81, 121, 94), 
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Memory Beat 텍스트
+            Container(
+              width: double.infinity,
+              //padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+              child: Text(
+                'Memory Beat',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 70,
+                  fontFamily: 'baloo',
+                ),
+              ),
+            ),
+            // Logo 이미지
+            //Container(
+              //width: double.infinity,
+              //padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+              //child: SvgPicture.asset(
+                //'assets/images/logo.svg',
+                //height: MediaQuery.of(context).size.height * 0.3,
+              //),
+            //),
+            SizedBox(height: 50),
+            // Start 버튼
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -74,9 +103,10 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('시작'),
+              child: Text('Start',style: TextStyle(fontFamily: 'baloo',fontWeight: FontWeight.bold,fontSize: 45,),),
             ),
-            SizedBox(height: 20), // 시작 버튼과 튜토리얼 버튼 사이의 간격 조절
+            SizedBox(height: 20),
+            // Tutorial 버튼
             ElevatedButton(
               onPressed: () {
                 showDialog(
@@ -86,7 +116,7 @@ class MyHomePage extends StatelessWidget {
                   },
                 );
               },
-              child: Text('튜토리얼'),
+              child: Text('Tutorial',style: TextStyle(fontFamily: 'baloo',fontWeight: FontWeight.bold,fontSize: 45,),),
             ),
           ],
         ),
@@ -96,7 +126,6 @@ class MyHomePage extends StatelessWidget {
 }
 
 
-
 class WebViewWidget extends StatefulWidget {
   @override
   _WebViewWidgetState createState() => _WebViewWidgetState();
@@ -104,15 +133,51 @@ class WebViewWidget extends StatefulWidget {
 
 class _WebViewWidgetState extends State<WebViewWidget> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: InAppWebView(
-        initialUrlRequest: URLRequest(url:WebUri('https://hjproject.kro.kr:8653/chat/room?roomId=24b5a01a-0c70-4eca-88c4-fcb85c063e88')),
-        onReceivedServerTrustAuthRequest: (controller, challenge) async {
-          return ServerTrustAuthResponse(action: ServerTrustAuthResponseAction.PROCEED);
-        },
+  void initState() {
+    _launchURL();
+    fetchData(); // API 데이터 가져오기
+    super.initState();
+  }
+Future<void> fetchData() async {
+    var url = Uri.https('https://192.168.1.117:8080', '/api/combo', {'q': '{http}'});
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
+      var combo = jsonResponse['combo'];
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('combo: $combo');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+    } else {
+      print('2222222222222222222222222222222222222222222222222222');
+      print('2222222222222222222222222222222222222222222222222222');
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+  void _launchURL() async {
+    const url = 'https://192.168.1.117:8080/';
+   if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    } Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyHomePage(),
       ),
     );
   }
-}
 
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    // 빈 컨테이너 대신 홈 화면으로 이동
+    return Container();
+  }
+}
