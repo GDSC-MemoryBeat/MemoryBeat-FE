@@ -160,7 +160,7 @@ Future<void> fetchData() async {
     }
   }
   void _launchURL() async {
-    const url = 'https://192.168.1.117:8080/';
+    const url = 'https://192.168.1.117:8080';
    if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url));
     } else {
